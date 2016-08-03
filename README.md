@@ -3,7 +3,7 @@
 It acts as an USB joystick, dispatching the channels values read from a regular RC receiver. Aimed to be fast and responsible, though simple to use with automatic calibration function. It can be useful to play simulator wireless from the computer with your favourite transmitter. Compatible with **Windows**, **Mac**, **Linux**, **Android**,**IOS**.
 
 ## Parts-list
- - [**Sparkfun/Arduino Pro Micro** (ATmega32u4)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR0.TRC0.H0.Xatmega32u4.TRS0&_nkw=atmega32u4&_sacat=0)
+ - [**Sparkfun Pro Micro** (5v/16Mhz)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR0.TRC0.H0.Xatmega32u4.TRS0&_nkw=atmega32u4&_sacat=0)
  - [**6 CH RC receiver** (PWM, 5v)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR3.TRC2.A0.H0.Xfs-r6b.TRS0&_nkw=fs-r6b&_sacat=0)
  - [**Tactile SPST switch** (momentary pushbutton)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR10.TRC2.A0.H0.Xspst+switch+smd.TRS0&_nkw=spst+switch+smd&_sacat=0)
  - [**some jumper wires** (female-female)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR12.TRC2.A0.H0.Xjumper+wire+arduino.TRS0&_nkw=jumper+wire+arduino&_sacat=0)
@@ -29,7 +29,7 @@ That's it, you can upload the code. Above steps apply only for Pro Micro boards!
 
 
 ##Wiring
-<a href="http://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png" target="_blank"><img src="http://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png" alt="Pro Micro wiring" width="334" height="215" border="0" /></a>
+<a href="http://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png" target="_blank"><img src="wiring.png" alt="Pro Micro wiring" width="334" height="215" border="0" /></a>
 
 ##Manual
 The Pro Micro boards usually have 2 leds side-by-side, which are the TX and RX status lights. These are used to reflect the state of the adapter:
