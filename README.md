@@ -13,7 +13,7 @@ The code is **mostly written for Sparkfun Pro Micro**, since it is based on ATme
 
 To upload this particular piece of code on the Pro Micro you're going to need Arduino IDE 1.6.5 at least. The game controller ability involves some modifying of the stock ide files:
 
-* Unpack the 32u4_USB_Joystick.zip
+* Unpack the `32u4_USB_Joystick.zip`
 
 * Copy/move the `HID.cpp` and `USBAPI.h` files to:
 
@@ -29,7 +29,7 @@ That's it, you can upload the code. Above steps apply only for Pro Micro boards!
 
 
 ##Wiring
-<a href="http://raw.githubusercontent.com/gregnau/rc_receiver_adapter/master/wiring.jpg" target="_blank"><img src="http://raw.githubusercontent.com/gregnau/rc_receiver_adapter/master/wiring.jpg" alt="Pro Micro wiring" width="334" height="215" border="0" /></a>
+<a href="http://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png" target="_blank"><img src="http://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png" alt="Pro Micro wiring" width="334" height="215" border="0" /></a>
 
 ##Manual
 The Pro Micro boards usually have 2 leds side-by-side, which are the TX and RX status lights. These are used to reflect the state of the adapter:
