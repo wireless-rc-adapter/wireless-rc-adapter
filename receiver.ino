@@ -16,12 +16,12 @@ void rc_ch5_change() { rc_channel_change(4); }
 void rc_ch6_change() { rc_channel_change(5); }
 
 void rc_setup_interrupts() {
-  PCintPort::attachInterrupt(rc_pins[0], &rc_ch1_change, CHANGE);
-  PCintPort::attachInterrupt(rc_pins[1], &rc_ch2_change, CHANGE);
-  PCintPort::attachInterrupt(rc_pins[2], &rc_ch3_change, CHANGE);
-  PCintPort::attachInterrupt(rc_pins[3], &rc_ch4_change, CHANGE);
-  PCintPort::attachInterrupt(rc_pins[4], &rc_ch5_change, CHANGE);
-  PCintPort::attachInterrupt(rc_pins[5], &rc_ch6_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[0], rc_ch1_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[1], rc_ch2_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[2], rc_ch3_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[3], rc_ch4_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[4], rc_ch5_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[5], rc_ch6_change, CHANGE);
 }
 
 void rc_process_channels() {

@@ -6,7 +6,7 @@
  * GregNau    2016
  */
 #include <EEPROM.h>
-#include <PinChangeInt.h>
+#include <PinChangeInterrupt.h>
 
 //#define DEBUG_ENABLED
 
