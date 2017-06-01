@@ -6,7 +6,8 @@
  * GregNau    2016
  */
 #include <EEPROM.h>
-#include <PinChangeInt.h>
+#include <PinChangeInterrupt.h>
+#include <Joystick.h>
 
 //#define DEBUG_ENABLED
 
@@ -22,7 +23,20 @@ volatile uint32_t rc_shared_ts[6];
 unsigned long calTimer,ledTimer;
 boolean calMode;
 
+Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, 
+  JOYSTICK_TYPE_MULTI_AXIS, 2, 0,
+  true, true, true, true, false, false,
+  true, true, false, false, false);
+
 void setup() {
+
+  Joystick.setXAxisRange(-127, 127);
+  Joystick.setYAxisRange(-127, 127);
+  Joystick.setZAxisRange(-127, 127);
+  Joystick.setRxAxisRange(-127, 127);
+  Joystick.setThrottleRange(0, 255);
+  Joystick.setRudderRange(0, 255);
+
   pinMode(A1, INPUT_PULLUP);  // Initialize the button pin
   
   #ifdef DEBUG_ENABLED
@@ -86,7 +100,7 @@ void loop() {
     // CH 3 (PIN 10)
     Joystick.setZAxis(map(rc_values[2],rc_min_values[2],rc_max_values[2], -127, 127));
     // CH 4 (PIN 16)
-    Joystick.setXAxisRotation(map(rc_values[3],rc_min_values[3],rc_max_values[3], 0, 360));
+    Joystick.setRxAxis(map(rc_values[3],rc_min_values[3],rc_max_values[3], -127, 127));
     // CH 5 (PIN 14)
     Joystick.setThrottle(map(rc_values[4],rc_min_values[4],rc_max_values[4], 0, 255));
     // CH 6 (PIN 15)
