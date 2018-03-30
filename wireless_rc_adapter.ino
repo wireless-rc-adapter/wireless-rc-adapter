@@ -10,15 +10,22 @@
 #include <Joystick.h>
 
 //#define DEBUG_ENABLED
+//#define PWM_RECEIVER
+#define PPM_RECEIVER
+
+uint16_t rc_values[6] = {0, 0, 0, 0, 0, 0};  // Actual channel values
+uint16_t rc_min_values[6],rc_max_values[6];  // Calibration data
+
+#ifdef PWM_RECEIVER
 
 uint8_t rc_pins[6] = {8, 9, 10, 16, 14, 15};  // Receiver input pins
 uint8_t rc_flags[6] = {1, 2, 4, 8, 16, 32};
-uint16_t rc_values[6] = {0, 0, 0, 0, 0, 0};  // Actual channel values
-uint16_t rc_min_values[6],rc_max_values[6];  // Calibration data
 
 volatile uint8_t rc_shared_flags;
 volatile uint16_t rc_shared_values[6];
 volatile uint32_t rc_shared_ts[6];
+
+#endif
 
 unsigned long calTimer,ledTimer;
 boolean calMode;
@@ -54,7 +61,12 @@ void setup() {
   
   readMem();  // Read calibration data from eeprom
   
+  #ifdef PWM_RECEIVER
   rc_setup_interrupts(); // Attach interrupt timers to receiver pins
+  #endif
+  #ifdef PPM_RECEIVER
+  rc_setup_ppm();
+  #endif
   
   // Check calibration values and enter cal.mode if necessary
   if (rc_min_values[0,1,2,3,4,5] < 360 || rc_max_values[0,1,2,3,4,5] > 3000 || digitalRead(A1) == LOW) {
@@ -84,7 +96,9 @@ void setup() {
 }
 
 void loop() {
+  #ifdef PWM_RECEIVER
   rc_process_channels();  // Measure channels pwm timing values.
+  #endif
   
   #ifdef DEBUG_ENABLED
   if (!calMode) {

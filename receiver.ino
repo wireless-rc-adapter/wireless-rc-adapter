@@ -1,3 +1,5 @@
+#ifdef PWM_RECEIVER
+
 void rc_channel_change(uint8_t id) {
   if (digitalRead(rc_pins[id]) == HIGH) {
     rc_shared_ts[id] = micros();
@@ -16,12 +18,12 @@ void rc_ch5_change() { rc_channel_change(4); }
 void rc_ch6_change() { rc_channel_change(5); }
 
 void rc_setup_interrupts() {
-  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[0], rc_ch1_change, CHANGE);
-  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[1], rc_ch2_change, CHANGE);
-  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[2], rc_ch3_change, CHANGE);
-  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[3], rc_ch4_change, CHANGE);
-  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[4], rc_ch5_change, CHANGE);
-  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[5], rc_ch6_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[0]), rc_ch1_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[1]), rc_ch2_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[2]), rc_ch3_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[3]), rc_ch4_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[4]), rc_ch5_change, CHANGE);
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(rc_pins[5]), rc_ch6_change, CHANGE);
 }
 
 void rc_process_channels() {
@@ -39,3 +41,5 @@ void rc_process_channels() {
 
   flags = 0;
 }
+
+#endif
