@@ -32,17 +32,15 @@ boolean calMode;
 
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, 
   JOYSTICK_TYPE_MULTI_AXIS, 2, 0,
-  true, true, true, true, false, false,
-  true, true, false, false, false);
+  true, true, true, false, false, true,
+  false, false, false, false, false);
 
 void setup() {
 
   Joystick.setXAxisRange(-127, 127);
   Joystick.setYAxisRange(-127, 127);
   Joystick.setZAxisRange(-127, 127);
-  Joystick.setRxAxisRange(-127, 127);
-  Joystick.setThrottleRange(0, 255);
-  Joystick.setRudderRange(0, 255);
+  Joystick.setRzAxisRange(-127, 127);
 
   pinMode(A1, INPUT_PULLUP);  // Initialize the button pin
   
@@ -108,17 +106,17 @@ void loop() {
   #else
   if (!calMode) {  // Joystick functions
     // CH 1 (PIN 8)
-    Joystick.setXAxis(map(rc_values[0],rc_min_values[0],rc_max_values[0], -127, 127));
+    Joystick.setZAxis(map(rc_values[0],rc_min_values[0],rc_max_values[0], -127, 127));
     // CH 2 (PIN 9)
-    Joystick.setYAxis(map(rc_values[1],rc_min_values[1],rc_max_values[1], -127, 127));
+    Joystick.setRzAxis(map(rc_values[1],rc_min_values[1],rc_max_values[1], -127, 127));
     // CH 3 (PIN 10)
-    Joystick.setZAxis(map(rc_values[2],rc_min_values[2],rc_max_values[2], -127, 127));
+    Joystick.setYAxis(map(rc_values[2],rc_min_values[2],rc_max_values[2], -127, 127));
     // CH 4 (PIN 16)
-    Joystick.setRxAxis(map(rc_values[3],rc_min_values[3],rc_max_values[3], -127, 127));
+    Joystick.setXAxis(map(rc_values[3],rc_min_values[3],rc_max_values[3], -127, 127));
     // CH 5 (PIN 14)
-    Joystick.setThrottle(map(rc_values[4],rc_min_values[4],rc_max_values[4], 0, 255));
+    Joystick.setButton(0, rc_values[4] < 1500 ? 0 : 1);
     // CH 6 (PIN 15)
-    Joystick.setRudder(map(rc_values[5],rc_min_values[5],rc_max_values[5], 0, 255));
+    Joystick.setButton(1, rc_values[5] < 1500 ? 0 : 1);
   }
   else calibration();  // Do calibration if flag active.
   #endif
