@@ -10,9 +10,9 @@ Following parts are necessary to build the adapter:
  - [**some jumper wires** (female-female)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR12.TRC2.A0.H0.Xjumper+wire+arduino.TRS0&_nkw=jumper+wire+arduino&_sacat=0)
 
 ## Requirements
-The code is **mostly written for Sparkfun Pro Micro**, since it is based on **ATmega 32U4** and can act as a game controller on USB. Though it may compile fine on other boards also (eg. Leonardo). 
-
-To upload this particular piece of code on the Pro Micro you're going to need Arduino IDE 1.8.2 at least.
+The code is **mostly written for Sparkfun Pro Micro**, since it is based on **ATmega 32U4** and can act as a game controller on USB. Although it may compile fine on other '32U4' boards also (eg. Leonardo). Compiling this code requires Arduino IDE v1.8.2 at least and 2 additional libraries.
+[**Arduino Joystick Library**](http://github.com/MHeironimus/ArduinoJoystickLibrary)
+[**PinChangeInterrupt Library**](http://github.com/NicoHood/PinChangeInterrupt)
 
 ## Wiring
 ![Wireless RC Adapter schematics](https://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png)
