@@ -14,9 +14,9 @@ Following parts are necessary to build the adapter:
 ## Requirements
 The code is **mostly written for Sparkfun Pro Micro**, since it is based on **ATmega 32U4** and can act as a game controller on USB. Although it may compile fine on other '32U4' boards also (eg. Leonardo). Compiling this code requires Arduino IDE v1.8.2 at least and 2 additional libraries.
 
-[**Arduino Joystick Library**](http://github.com/MHeironimus/ArduinoJoystickLibrary)
+ - [**Arduino Joystick Library**](http://github.com/MHeironimus/ArduinoJoystickLibrary)
 
-[**PinChangeInterrupt Library**](http://github.com/NicoHood/PinChangeInterrupt)
+ - [**PinChangeInterrupt Library**](http://github.com/NicoHood/PinChangeInterrupt)
 
 ## Wiring
 ![Wireless RC Adapter schematics](https://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png)
