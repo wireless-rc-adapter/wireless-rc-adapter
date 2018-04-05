@@ -1,5 +1,6 @@
 # Wireless RC Adapter
 **Arduino game controller adapter for RC receivers up to 6 channels.**
+
 There is no need to hook the transmitter with cables to the simulator device anymore. Instead plug your favorite RC receiver in the adapter and play wireless on TV, Desktop or even handheld device. It acts as an USB joystick, dispatching the channels values read from a regular RC receiver. Aimed to be fast and responsible, though simple to use with automatic calibration function. It can be useful to play simulator wireless from the computer with your favourite transmitter. Compatible with **Windows**, **Mac**, **Linux**, **Android**,**iOS**.
 
 ## Parts-list
