@@ -1,6 +1,6 @@
 
-# [Wireless RC Receiver Adapter](http://gregnau.github.io/wireless_rc_receiver)
-![Wireless RC Receiver Adapter](http://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/adapter.png)
+# [Wireless RC Receiver Adapter](http://gregnau.github.io/wireless_rc_adapter)
+![Wireless RC Receiver Adapter](https://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/adapter.png)
 
 There is no need to hook the transmitter with cables to the simulator device anymore. Instead plug your favorite RC receiver in the adapter and play wireless on TV, Desktop or even on Mobile devices. It acts as an USB joystick, dispatching the channel-values read from the RC receiver. Aimed to be fast and responsible, though simple to use with automatic calibration.
 
@@ -20,6 +20,17 @@ Compiling requires Arduino IDE v1.8.2 at least and 2 external libraries.
  - [**PinChangeInterrupt Library**](http://github.com/NicoHood/PinChangeInterrupt)
 
 Make sure these are installed properly before compiling, otherwise it will instantly fail.
+Both them have clearly detailed instructions about installing in the README.md file.
+
+## Installation
+Clone or download this repository in the Arduinos ```sketchbook``` folder.
+
+By default it is located in:
+ * Windows: ```%userprofile%/Documents/Arduino```
+ * Linux: ```~/Sketchbook``` or ```~/Arduino```
+ * Mac: ```~/Documents/Arduino```
+ 
+Then don't forget to remove the ```-master``` from the directory name.
 
 ## Parts-list
 Following parts are necessary to build the adapter:
@@ -29,7 +40,7 @@ Following parts are necessary to build the adapter:
  - [**some jumper wires** (female-female)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR12.TRC2.A0.H0.Xjumper+wire+arduino.TRS0&_nkw=jumper+wire+arduino&_sacat=0)
 
 ## Wiring
-![Wireless RC Adapter schematics](http://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png)
+![Wireless RC Adapter schematics](https://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png)
 > *** the USB plug is optional, only needed when the board cannot supply enough current to the receiver.
 
 ## Manual
