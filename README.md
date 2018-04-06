@@ -5,7 +5,9 @@
 There is no need to hook the transmitter with cables to the simulator device anymore. Instead plug your favorite RC receiver in the adapter and play wireless on TV, Desktop or even on Mobile devices. It acts as an USB joystick, dispatching the channel-values read from the RC receiver. Aimed to be fast and responsible, though simple to use with automatic calibration.
 
 **Have been reported to work great with these simulators and games:**
+
 [FPV Freerider](http://fpv-freerider.itch.io/fpv-freerider) | [FPV Freerider Recharged](http://fpv-freerider.itch.io/fpv-freerider-recharged) | [RealFlight](http://www.realflight.com) | [Phoenix](http://www.phoenix-sim.com) | etc ...
+
 Should work with literally everything, which supports game-controllers.
 
 Compatible with **Windows**, **Mac**, **Linux**, **Android**,**iOS**.
