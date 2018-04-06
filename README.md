@@ -39,11 +39,13 @@ Following parts are necessary to build the adapter:
  - [**some jumper wires** (female-female)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR12.TRC2.A0.H0.Xjumper+wire+arduino.TRS0&_nkw=jumper+wire+arduino&_sacat=0)
 
 ## Wiring
-### PWM (eg. Turnigy 9x/FlySky TH9x)
+### PWM (eg. Turnigy 9x/FlySky TH9x):
 ![Wireless RC Adapter PWM schematics](https://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring-pwm.png)
 > *** the USB plug is optional, only needed when the board cannot supply enough current to the receiver.
 
-### PPM (eg. FlySky A8s/Turnigy iA6c)
+---
+
+### PPM (eg. FlySky A8s/Turnigy iA6c):
 ![Wireless RC Adapter PPM schematics](https://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring-ppm.png)
 > *** the USB plug is optional, only needed when the board cannot supply enough current to the receiver.
 
