@@ -1,6 +1,5 @@
-# Wireless RC Adapter
-**Arduino game controller adapter for RC receivers up to 6 channels.**
-
+# [Wireless RC Adapter](http://gregnau.github.io/wireless_rc_receiver)
+![Wireless RC Adapter](http://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/adapter.png)
 There is no need to hook the transmitter with cables to the simulator device anymore. Instead plug your favorite RC receiver in the adapter and play wireless on TV, Desktop or even handheld device. It acts as an USB joystick, dispatching the channels values read from a regular RC receiver. Aimed to be fast and responsible, though simple to use with automatic calibration function. It can be useful to play simulator wireless from the computer with your favourite transmitter. 
 Compatible with **Windows**, **Mac**, **Linux**, **Android**,**iOS**.
 
@@ -12,14 +11,15 @@ Following parts are necessary to build the adapter:
  - [**some jumper wires** (female-female)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR12.TRC2.A0.H0.Xjumper+wire+arduino.TRS0&_nkw=jumper+wire+arduino&_sacat=0)
 
 ## Requirements
-The code is **mostly written for Sparkfun Pro Micro**, since it is based on **ATmega 32U4** and can act as a game controller on USB. Although it may compile fine on other '32U4' boards also (eg. Leonardo). Compiling this code requires Arduino IDE v1.8.2 at least and 2 additional libraries.
+The code is **mostly written for Sparkfun Pro Micro**, since it is based on **ATmega 32U4** and can act as a game controller on USB. Although it may compile fine on other '32U4' boards also (eg. Leonardo). Compiling this code requires Arduino IDE v1.8.2 at least and 2 external libraries.
 
  - [**Arduino Joystick Library**](http://github.com/MHeironimus/ArduinoJoystickLibrary)
 
  - [**PinChangeInterrupt Library**](http://github.com/NicoHood/PinChangeInterrupt)
 
 ## Wiring
-![Wireless RC Adapter schematics](https://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png)
+![Wireless RC Adapter schematics](http://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png)
+> *** the USB plug is optional, only needed when the board cannot supply enough current to the receiver.
 
 ## Manual
 The Pro Micro boards usually have 2 leds side-by-side, which are sometimes labeles as the TX and RX. These are used to reflect the actual state of the adapter. On every startup flashing twice, then one of them is going of, the other one stays on. This means booted up successfully and ready to play. When both of them stays on, that means the adapter is in calibration mode.
