@@ -1,4 +1,3 @@
-
 # [Wireless RC Receiver Adapter](http://gregnau.github.io/wireless_rc_adapter)
 ![Wireless RC Receiver Adapter](https://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/adapter.png)
 
@@ -10,7 +9,7 @@ Should work with literally everything, which supports game-controllers.
 
 [FPV Freerider](http://fpv-freerider.itch.io/fpv-freerider) | [FPV Freerider Recharged](http://fpv-freerider.itch.io/fpv-freerider-recharged) | [RealFlight](http://www.realflight.com) | [Phoenix](http://www.phoenix-sim.com) | etc ...
 
-Compatible with **Windows**, **Mac**, **Linux**, **Android**,**iOS**.
+Compatible on **Windows**, **Mac**, **Linux**, **Android**,**iOS** with **PWM** or **PPM** receivers.
 
 ## Requirements
 The code is **mostly written for Sparkfun Pro Micro**, cause it is based on **ATmega 32U4** which can act as a game controller on USB. Although it may compile fine on other ```'32U4'``` boards also (eg. Leonardo).
@@ -40,7 +39,12 @@ Following parts are necessary to build the adapter:
  - [**some jumper wires** (female-female)](http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR12.TRC2.A0.H0.Xjumper+wire+arduino.TRS0&_nkw=jumper+wire+arduino&_sacat=0)
 
 ## Wiring
-![Wireless RC Adapter schematics](https://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring.png)
+### PWM (eg. Turnigy 9x/FlySky TH9x)
+![Wireless RC Adapter PWM schematics](https://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring-pwm.png)
+> *** the USB plug is optional, only needed when the board cannot supply enough current to the receiver.
+
+### PPM (eg. FlySky A8s/Turnigy iA6c)
+![Wireless RC Adapter PPM schematics](https://raw.githubusercontent.com/gregnau/wireless_rc_adapter/master/wiring-ppm.png)
 > *** the USB plug is optional, only needed when the board cannot supply enough current to the receiver.
 
 ## Manual
