@@ -31,7 +31,7 @@ unsigned long calTimer,ledTimer;
 boolean calMode;
 
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, 
-  JOYSTICK_TYPE_MULTI_AXIS, 2, 0,
+  JOYSTICK_TYPE_JOYSTICK, 2, 0,
   true, true, true, false, false, true,
   false, false, false, false, false);
 
