@@ -1,33 +1,34 @@
-/*
- * Added by Bayu Laksono
- * https://github.com/sblaksono/wireless_rc_adapter
- *
- * 2018-03-27
+/* Added by Bayu Laksono
+ * http://github.com/sblaksono/wireless_rc_adapter
+ * by Bayu Laksono 27-03-2018
  *
  * Code to read PPM taken from : 
  * https://github.com/timonorawski/RCPPMJoystick
- * by Timon Orawski 
- * 2016-04-11  
- * Copyright (c) 2016, Timon Orawski
+ * by Timon Orawski 11-04-2016  
+ * Copyright (c) Timon Orawski
  */
-#ifdef PPM_RECEIVER
+ 
+#if defined PPM_RECEIVER
+  #include <avr/interrupt.h>
 
-#include <avr/interrupt.h>
+#if defined FUTABA
+  #if defined CUSTOM_STICK_CENTER
+    #define STICK_CENTER CUSTOM_STICK_CENTER
+  #else
+    #define STICK_CENTER 1530
+  #endif
 
-//#define FUTABA
-
-#ifdef FUTABA
-#define STICK_HALFWAY 450
-#define STICK_CENTER 1530
-#define THRESHOLD 200
+  #define STICK_HALFWAY 450
+  #define THRESHOLD 200  // Threshold is used to detect PPM values (added to range at both ends)
 #else
-#ifdef CUSTOM_STICK_CENTER
-#define STICK_CENTER CUSTOM_STICK_CENTER
-#else
-#define STICK_CENTER 1500
-#endif
-#define STICK_HALFWAY 500
-#define THRESHOLD 100 // threshold is used to detect PPM values (added to range at both ends)
+  #if defined CUSTOM_STICK_CENTER
+    #define STICK_CENTER CUSTOM_STICK_CENTER
+  #else
+    #define STICK_CENTER 1500
+  #endif
+
+  #define STICK_HALFWAY 500
+  #define THRESHOLD 100
 #endif
 
 #define USB_STICK_VALUE_MIN 0
@@ -45,16 +46,7 @@
 #define NEWFRAME_PULSE_WIDTH 3000
 #define TIMER_COUNT_DIVIDER 2
 
-void rc_setup_ppm() {
-  setupPins();
-  initTimer();
-}
 
-void setupPins(void) {
-  // Set up the Input Capture pin
-  pinMode(PPM_CAPTURE_PIN, INPUT);
-  digitalWrite(PPM_CAPTURE_PIN, 1); // enable the pullup
-}
 
 void initTimer(void) {
   // Input Capture setup
@@ -67,8 +59,8 @@ void initTimer(void) {
 
   // Interrupt setup
   // ICIE1: Input capture
-  TIFR1 = (1 << ICF1); // clear pending
-  TIMSK1 = (1 << ICIE1); // and enable
+  TIFR1 = (1 << ICF1);  // clear pending
+  TIMSK1 = (1 << ICIE1);  // and enable
 }
 
 uint16_t adjust(uint16_t diff, uint8_t chan) {
@@ -82,8 +74,18 @@ uint16_t adjust(uint16_t diff, uint8_t chan) {
   //   case AUX1:     return diff + 10;
   // }
 
-  //convert to microseconds (because of timer prescaler usage)
+  // Convert to microseconds (because of timer prescaler usage)
   return diff / TIMER_COUNT_DIVIDER;
+}
+
+void setupPins(void) {
+  pinMode(PPM_CAPTURE_PIN, INPUT);  // Set-up the input capture pin
+  digitalWrite(PPM_CAPTURE_PIN, HIGH);  // Enable the internal pullup-resistor
+}
+
+void rc_setup_ppm() {
+  setupPins();
+  initTimer();
 }
 
 ISR(TIMER1_CAPT_vect) {
@@ -96,26 +98,26 @@ ISR(TIMER1_CAPT_vect) {
   static uint16_t last = 0;
   static uint8_t chan = 0;
 
-  timeValue.byte[0] = ICR1L;    // grab captured timer value (low byte)
-  timeValue.byte[1] = ICR1H;    // grab captured timer value (high byte)
+  timeValue.byte[0] = ICR1L;  // Grab captured timer value (low byte)
+  timeValue.byte[1] = ICR1H;  // Grab captured timer value (high byte)
 
   now = timeValue.word;
   diff = now - last;
   last = now;
 
-  //all numbers are microseconds multiplied by TIMER_COUNT_DIVIDER (as prescaler is set to 1/8 of 16 MHz)
+  // All numbers are microseconds multiplied by TIMER_COUNT_DIVIDER (as prescaler is set to 1/8 of 16 MHz)
   if (diff > (NEWFRAME_PULSE_WIDTH * TIMER_COUNT_DIVIDER)) {
-    chan = 0;  // new data frame detected, start again
+    chan = 0;  // New data frame detected, start again
   }
   else {
     if (diff > (MIN_PULSE_WIDTH * TIMER_COUNT_DIVIDER - THRESHOLD)
         && diff < (MAX_PULSE_WIDTH * TIMER_COUNT_DIVIDER + THRESHOLD)
-        && chan < RC_CHANNELS_COUNT)
-    {
-      rc_values[chan] = adjust(diff, chan); //store detected value
+        && chan < RC_CHANNELS_COUNT) {
+      rc_values[chan] = adjust(diff, chan);  // Store detected value
+      tx_shared_flags |= FLAGS[chan];
     }
-    chan++; //no value detected within expected range, move to next channel
+
+    chan++;  // No value detected within expected range, move to next channel
   }
 }
-
 #endif

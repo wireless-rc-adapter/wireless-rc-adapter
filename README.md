@@ -1,8 +1,7 @@
 ![GPLv3 Licensed](https://img.shields.io/badge/license-GPLv3-blue.svg) ![Platforms: Android, Windows, MacOS, Linux](https://img.shields.io/badge/platforms-Android%20%7C%20Windows%20%7C%20Mac%20%7C%20Linux-lightgrey.svg) ![Arduino v1.8.2](https://img.shields.io/badge/arduino-v1.8.2-brightgreen.svg) ![Up-To-Date Dependencies](https://img.shields.io/badge/dependencies-Up%20To%20Date-blue.svg) ![Arduino v1.8.2](https://img.shields.io/badge/development-Active-orange.svg)
 
-# [Wireless RC Adapter](http://wireless-rc-adapter.github.io)
-
-There is no need to hook the transmitter with cables to the simulator device anymore. Instead plug your favorite RC receiver in the adapter and play wireless on TV, Desktop or even on Mobile devices. It acts as an USB joystick, dispatching the channel-values read from the RC receiver. Aimed to be fast and responsible, though simple to use with automatic calibration.
+# Wireless RC Adapter
+There is no need to hook the transmitter with cables to the simulator device anymore. Instead plug your favorite RC receiver in the adapter and play wireless on TV, Desktop or even on Mobile devices. It acts as an USB joystick, dispatching the channel-values read from the RC receiver. Aimed to be fast and responsible, though simple to use.
 
 Should work with literally everything, which supports game-controllers.
 

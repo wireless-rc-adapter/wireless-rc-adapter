@@ -1,134 +1,94 @@
-/* Arduino Wireless RC Adapter
+/* Wireless RC Adapter
  * 
- * Connects a PWM receiver as a HID compatible
- * game controller to almost any kind of device.
+ * Connects an RC receiver as a HID compatible
+ * joystick to almost any kind of device, with
+ * just a simple USB cable.
  * 
- * GregNau    2016
+ * GregNau    2016-2019
  */
-#include <EEPROM.h>
-#include <PinChangeInterrupt.h>
-#include <Joystick.h>
 
-//#define DEBUG_ENABLED
-//#define PWM_RECEIVER
-#define PPM_RECEIVER
+// Configuration options
+//#define PWM_RECEIVER  // Enable PWM receiver (!only if PPM disabled!)
+#define PPM_RECEIVER  // Enable PPM receiver (!only if PWM disabled!)
+//#define DEBUG_ENABLED  // Enable Serial Debug
+//#define DEBUG_SERSPD 115200  // Serial Debug bps (9600-115200)
+#define CAL_TIMEOUT 7000  // Set auto-accept timout in ms for calibration
+//#define FUTABA  // Futaba PPM workaround
 
+
+/**************** DO NOT EDIT BELOW THIS LINE, UNLESS YOU KNOW HOW TO FIX IT ****************/
+
+
+// Global variables
+bool cal_mode, led_mode;
+uint8_t tx_shared_flags;
+uint32_t cal_timer, led_timer;
 uint16_t rc_values[6] = {0, 0, 0, 0, 0, 0};  // Actual channel values
-uint16_t rc_min_values[6],rc_max_values[6];  // Calibration data
+uint16_t rc_min_values[6], rc_max_values[6];  // Calibration data arrays
+const uint8_t FLAGS[6] = {1, 2, 4, 8, 16, 32};  // Channel position flags
 
-#ifdef PWM_RECEIVER
+#if defined PWM_RECEIVER
+  volatile uint8_t rc_shared_flags; // Receiver shared flags byte
+  volatile uint32_t rc_shared_ts[6];  // Long-array to store TimeSequences
+  volatile uint16_t rc_shared_values[6];  // Shared receiver values int-array
 
-uint8_t rc_pins[6] = {8, 9, 10, 16, 14, 15};  // Receiver input pins
-uint8_t rc_flags[6] = {1, 2, 4, 8, 16, 32};
-
-volatile uint8_t rc_shared_flags;
-volatile uint16_t rc_shared_values[6];
-volatile uint32_t rc_shared_ts[6];
-
+  #if defined ARDUINO_AVR_PROMICRO
+    const uint8_t RC_PINS[6] = {8, 9, 10, 16, 14, 15};  // Input pins on SparkFun ProMicro
+  #elif defined ARDUINO_AVR_MICRO || defined ARDUINO_AVR_LEONARDO
+    const uint8_t RC_PINS[4] = {8, 9, 10, 11};  // Input pins on Arduino Leonardo/Micro
+  #elif defined ARDUINO_AVR_NANO || defined ARDUINO_AVR_UNO || defined ARDUINO_AVR_DUEMILANOVE  // No joystick...
+    #define DEBUG_ENABLED  // Only serial debug
+    const uint8_t RC_PINS[6] = {A0, A1, A2, A3, A4, A5};  // Input pins on Arduino Nano,Uno,Due
+  #elif defined ARDUINO_AVR_ADK || defined ARDUINO_AVR_MEGA || defined ARDUINO_AVR_MEGA2560  // No Joystick...
+    #define DEBUG_ENABLED  // Only serial debug
+    const uint8_t RC_PINS[6] = {A10, A11, A12, A13, A14, A15};  // Input pins on Arduino Mega, ADK, 2560
+  #endif
+#elif defined PPM_RECEIVER
+  #if defined ARDUINO_AVR_NANO || defined ARDUINO_AVR_UNO || defined ARDUINO_AVR_DUEMILANOVE || defined ARDUINO_AVR_ADK || defined ARDUINO_AVR_MEGA || defined ARDUINO_AVR_MEGA2560
+    #define DEBUG_ENABLED  // Only serial debug, no joystick!
+  #endif
 #endif
 
-unsigned long calTimer,ledTimer;
-boolean calMode;
-
-Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, 
-  JOYSTICK_TYPE_JOYSTICK, 2, 0,
-  true, true, true, false, false, true,
-  false, false, false, false, false);
+#if !defined DEBUG_ENABLED
+  #include <Joystick.h>
+  
+  Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,
+                     JOYSTICK_TYPE_JOYSTICK, 2, 0,
+                     true, true, true, false, false, true,
+                     false, false, false, false, false);
+#endif
 
 void setup() {
+  initButton();
+  initLed();
 
-  Joystick.setXAxisRange(-127, 127);
-  Joystick.setYAxisRange(-127, 127);
-  Joystick.setZAxisRange(-127, 127);
-  Joystick.setRzAxisRange(-127, 127);
-
-  pinMode(A1, INPUT_PULLUP);  // Initialize the button pin
-  
-  #ifdef DEBUG_ENABLED
-    Serial.begin(9600);
-    while (!Serial) {  // Wait here for a serial connection
-      TXLED1;
-      RXLED0;
-      delay(250);
-      TXLED0;
-      RXLED1;
-      delay(250);
-    }
-    Serial.println("Arduino Wireless RC Adapter (DEBUG MODE)\n");
+  #if defined DEBUG_ENABLED
+    initSerial();
+  #else
+    initJoystick();
   #endif
   
   readMem();  // Read calibration data from eeprom
-  
-  #ifdef PWM_RECEIVER
-  rc_setup_interrupts(); // Attach interrupt timers to receiver pins
-  #endif
-  #ifdef PPM_RECEIVER
-  rc_setup_ppm();
-  #endif
-  
-  // Check calibration values and enter cal.mode if necessary
-  if (rc_min_values[0,1,2,3,4,5] < 360 || rc_max_values[0,1,2,3,4,5] > 3000 || digitalRead(A1) == LOW) {
-    calMode = true;
 
-    // Turn leds on during calibration
-    TXLED1;
-    RXLED1;
-
-    #ifdef DEBUG_ENABLED
-      Serial.println("CALIBRATION ACTIVE");
-    #endif
-    
-    // Set initial minimum values (very?) high for calibration
-    for (byte i=0;i<6;i++) {
-        rc_min_values[i] = 2500;
-        rc_max_values[i] = 0;
-    }
-  }
-  else {
-    #ifdef DEBUG_ENABLED
-      Serial.println("CALIBRATION DATA LOADED FROM EEPROM.");
-    #else
-      Joystick.begin();  // init joystick with 'autosendvalues' enabled
-    #endif
-  }
+  #if defined PPM_RECEIVER
+    rc_setup_ppm();  // Attach interrupt timer to ppm pin
+  #elif defined PWM_RECEIVER
+    rc_setup_pwm();  // Attach interrupt timers to pwm pins
+  #endif
+  
+  checkIfCal();  // Check calibration values and enter cal.mode if necessary
 }
 
 void loop() {
-  #ifdef PWM_RECEIVER
-  rc_process_channels();  // Measure channels pwm timing values.
+  #if defined PWM_RECEIVER
+    pwm_process_channels();  // Measure channels pwm timing values.
   #endif
   
-  #ifdef DEBUG_ENABLED
-  if (!calMode) {
-    rc_print_channels();  // Print channel values on serial terminal.
-  }
-  else calibration();  // Do calibration if flag active.
+  #if defined DEBUG_ENABLED
+    if (!cal_mode) rc_print_channels();  // Print channel values on serial terminal.
+    else calibration();  // Do calibration if flag active.
   #else
-  if (!calMode) {  // Joystick functions
-    // CH 1 (PIN 8)
-    Joystick.setZAxis(map(rc_values[0],rc_min_values[0],rc_max_values[0], -127, 127));
-    // CH 2 (PIN 9)
-    Joystick.setRzAxis(map(rc_values[1],rc_min_values[1],rc_max_values[1], -127, 127));
-    // CH 3 (PIN 10)
-    Joystick.setYAxis(map(rc_values[2],rc_min_values[2],rc_max_values[2], -127, 127));
-    // CH 4 (PIN 16)
-    Joystick.setXAxis(map(rc_values[3],rc_min_values[3],rc_max_values[3], -127, 127));
-    // CH 5 (PIN 14)
-    Joystick.setButton(0, rc_values[4] < 1500 ? 0 : 1);
-    // CH 6 (PIN 15)
-    Joystick.setButton(1, rc_values[5] < 1500 ? 0 : 1);
-  }
-  else calibration();  // Do calibration if flag active.
+    if (!cal_mode) outputJoystick();  // Joystick functions
+    else calibration();  // Do calibration if flag active
   #endif
 }
-
-#ifdef DEBUG_ENABLED
-void rc_print_channels() {
-  static char str[70];
-
-  sprintf(str, "CH1: %d | CH2: %d | CH3: %d | CH4: %d | CH5: %d | CH6: %d\n",
-    rc_values[0], rc_values[1], rc_values[2], rc_values[3], rc_values[4], rc_values[5]);
-
-  Serial.print(str);
-}
-#endif
