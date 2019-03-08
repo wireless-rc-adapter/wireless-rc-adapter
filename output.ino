@@ -1,9 +1,10 @@
 #if !defined DEBUG_ENABLED
   void initJoystick() {
-    Joystick.setXAxisRange(-127, 127);
-    Joystick.setYAxisRange(-127, 127);
-    Joystick.setZAxisRange(-127, 127);
-    Joystick.setRzAxisRange(-127, 127);
+//    Joystick.setXAxisRange(-127, 127);
+//    Joystick.setYAxisRange(-127, 127);
+//    Joystick.setZAxisRange(-127, 127);
+//    Joystick.setRzAxisRange(-127, 127);
+    ;
   }
   
   void outputJoystick() {
@@ -17,16 +18,16 @@
         if (localflags & FLAGS[i]) {
           switch (i) {
             case 0:  // CH 1
-              Joystick.setZAxis(map(rc_values[0],rc_min_values[0],rc_max_values[0], -127, 127));
+              Joystick.setXAxis(map(rc_values[0],rc_min_values[0],rc_max_values[0], 0, 1023));
               break;
             case 1:  // CH 2
-              Joystick.setRzAxis(map(rc_values[1],rc_min_values[1],rc_max_values[1], -127, 127));
+              Joystick.setYAxis(map(rc_values[1],rc_min_values[1],rc_max_values[1], 0, 1023));
               break;
             case 2:  // CH 3
-              Joystick.setYAxis(map(rc_values[2],rc_min_values[2],rc_max_values[2], -127, 127));
+              Joystick.setZAxis(map(rc_values[2],rc_min_values[2],rc_max_values[2], 0, 1023));
               break;
             case 3:  // CH 4
-              Joystick.setXAxis(map(rc_values[3],rc_min_values[3],rc_max_values[3], -127, 127));
+              Joystick.setRzAxis(map(rc_values[3],rc_min_values[3],rc_max_values[3], 0, 1023));
               break;
             case 4:  // CH 5
               Joystick.setButton(0, rc_values[4] < 1500 ? 0 : 1);

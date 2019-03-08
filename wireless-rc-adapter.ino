@@ -9,7 +9,7 @@
 
 // Configuration options
 //#define PWM_RECEIVER  // Enable PWM receiver (!only if PPM disabled!)
-#define PPM_RECEIVER  // Enable PPM receiver (!only if PWM disabled!)
+//#define PPM_RECEIVER  // Enable PPM receiver (!only if PWM disabled!)
 //#define DEBUG_ENABLED  // Enable Serial Debug
 //#define DEBUG_SERSPD 115200  // Serial Debug bps (9600-115200)
 #define CAL_TIMEOUT 7000  // Set auto-accept timout in ms for calibration
@@ -26,6 +26,17 @@ uint32_t cal_timer, led_timer;
 uint16_t rc_values[6] = {0, 0, 0, 0, 0, 0};  // Actual channel values
 uint16_t rc_min_values[6], rc_max_values[6];  // Calibration data arrays
 const uint8_t FLAGS[6] = {1, 2, 4, 8, 16, 32};  // Channel position flags
+
+#if defined PWM_RECEIVER && defined PPM_RECEIVER
+  #error Both PWM_ and PPM_ receiver is enabled, please disable one!
+
+#elif !defined PWM_RECEIVER && !defined PPM_RECEIVER
+  #error No _RECEIVER modulation have been configure, please set one!
+#endif
+
+#if defined(DEBUG_ENABLED) && !defined(DEBUG_SERSPD)
+#warning There is no Serial bitrate defined, using default 9600 bps.
+#endif  // defined(DEBUG_ENABLED) && !defined(DEBUG_SERSPD)
 
 #if defined PWM_RECEIVER
   volatile uint8_t rc_shared_flags; // Receiver shared flags byte

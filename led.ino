@@ -1,7 +1,8 @@
+// Init the led(s) for various boards
 void initLed() {
-  #if defined ARDUINO_AVR_PROMICRO
-    TXLED0;
-    RXLED0;
+  #if defined ARDUINO_AVR_PROMICRO  // Needs no pinMode change
+    TXLED0;  // Just turn off initially
+    RXLED0;  // Both of them
   #elif defined ARDUINO_AVR_MICRO || defined ARDUINO_AVR_LEONARDO
     #define RXLED 17  // RXLED is on pin 17
     #define TXLED 30  // TXLED is on pin 30
@@ -12,10 +13,10 @@ void initLed() {
     digitalWrite(RXLED, LOW);
   #elif defined ARDUINO_AVR_NANO || defined ARDUINO_AVR_UNO || defined ARDUINO_AVR_DUEMILANOVE
     #define LEDPIN 13
+
     pinMode(LEDPIN, OUTPUT);
     digitalWrite(LEDPIN, LOW);
   #elif defined ARDUINO_AVR_ADK || defined ARDUINO_AVR_MEGA || defined ARDUINO_AVR_MEGA2560
-    #define LEDPIN
     ;  // ToDo - support on MEGA ADK/2560 boards
   #endif
 }
@@ -31,7 +32,6 @@ void ledOn() {
   #elif defined ARDUINO_AVR_NANO || defined ARDUINO_AVR_UNO || defined ARDUINO_AVR_DUEMILANOVE
     digitalWrite(LEDPIN, HIGH);
   #elif defined ARDUINO_AVR_ADK || defined ARDUINO_AVR_MEGA || defined ARDUINO_AVR_MEGA2560
-    #define LEDPIN
     ;  // ToDo - support on MEGA ADK/2560 boards
   #endif
 }
@@ -47,87 +47,62 @@ void ledOff() {
   #elif defined ARDUINO_AVR_NANO || defined ARDUINO_AVR_UNO || defined ARDUINO_AVR_DUEMILANOVE
     digitalWrite(LEDPIN, LOW);
   #elif defined ARDUINO_AVR_ADK || defined ARDUINO_AVR_MEGA || defined ARDUINO_AVR_MEGA2560
-    #define LEDPIN
     ;  // ToDo - support on MEGA ADK/2560 boards
   #endif
 }
 
-// It is a blocking function on purpose, do not use it
+// Blink the led(s) given times and delay interval (!BLOCKING FUNCTION!)
 void blinkLed(uint8_t times, uint8_t dly) {
-  #if defined ARDUINO_AVR_PROMICRO
-    for (uint8_t t=0;t<times;t++) {
-        TXLED1;
-        RXLED1;
-        delay(dly);
-        TXLED0;
-        RXLED0;
-        delay(dly);
-    }
-  #elif defined ARDUINO_AVR_MICRO || defined ARDUINO_AVR_LEONARDO
-    #define RXLED 17  // RXLED is on pin 17
-    #define TXLED 30  // TXLED is on pin 30
-
-    for (uint8_t t=0;t<times;t++) {
+  for (uint8_t t=0;t<times;t++) {
+    #if defined ARDUINO_AVR_PROMICRO
+      TXLED1;
+      RXLED1;
+      delay(dly);
+      TXLED0;
+      RXLED0;
+      delay(dly);
+    #elif defined ARDUINO_AVR_MICRO || defined ARDUINO_AVR_LEONARDO
       digitalWrite(TXLED, HIGH);
       digitalWrite(RXLED, HIGH);
       delay(dly);
       digitalWrite(TXLED, LOW);
       digitalWrite(RXLED, LOW);
       delay(dly);
-    }
-  #elif defined ARDUINO_AVR_NANO || defined ARDUINO_AVR_UNO || defined ARDUINO_AVR_DUEMILANOVE
-    #define LEDPIN 13  // Led "L" is on pin D13
-
-    for (uint8_t t=0;t<times;t++) {
+    #elif defined ARDUINO_AVR_NANO || defined ARDUINO_AVR_UNO || defined ARDUINO_AVR_DUEMILANOVE
       digitalWrite(LEDPIN, HIGH);
       delay(dly);
       digitalWrite(LEDPIN, LOW);
       delay(dly);
-    }
-  #elif defined ARDUINO_AVR_ADK || defined ARDUINO_AVR_MEGA || defined ARDUINO_AVR_MEGA2560
-    ;  // ToDo - support on MEGA ADK/2560 boards
-  #endif
+    #elif defined ARDUINO_AVR_ADK || defined ARDUINO_AVR_MEGA || defined ARDUINO_AVR_MEGA2560
+      ;  // ToDo - support on MEGA ADK/2560 boards
+    #endif
+  }
 }
 
 void waveLed(uint16_t dly) {
   uint32_t curtime = millis();
   
-  #if defined ARDUINO_AVR_PROMICRO
-    if (curtime - led_timer >= dly) {
-      if (!led_mode) {
-        TXLED1;
-        RXLED0;
-      }
-      else {
-        TXLED0;
-        RXLED1;
-      }
-      led_mode = !led_mode;
-      led_timer = curtime;
+  if (curtime - led_timer >= dly) {
+    if (!led_mode) {
+      #if defined ARDUINO_AVR_PROMICRO
+          TXLED1;
+          RXLED0;
+        } else {
+          TXLED0;
+          RXLED1;
+      #elif defined ARDUINO_AVR_MICRO || defined ARDUINO_AVR_LEONARDO
+          digitalWrite(TXLED, led_mode);
+          digitalWrite(RXLED, !led_mode);
+        } else {
+          digitalWrite(TXLED, led_mode);
+          digitalWrite(RXLED, !led_mode);
+      #elif defined ARDUINO_AVR_NANO || defined ARDUINO_AVR_UNO || defined ARDUINO_AVR_DUEMILANOVE
+          digitalWrite(LEDPIN, led_mode);
+        } else {
+          digitalWrite(LEDPIN, led_mode);
+      #endif
     }
-  #elif defined ARDUINO_AVR_MICRO || defined ARDUINO_AVR_LEONARDO
-    if (curtime - led_timer >= dly) {
-      if (!led_mode) {
-        digitalWrite(TXLED, !led_mode);
-        digitalWrite(RXLED, led_mode);
-      }
-      else {
-        digitalWrite(TXLED, led_mode);
-        digitalWrite(RXLED, !led_mode);
-      }
-      led_mode = !led_mode;
-      led_timer = curtime;
-    }
-  #elif defined ARDUINO_AVR_NANO || defined ARDUINO_AVR_UNO || defined ARDUINO_AVR_DUEMILANOVE
-    if (curtime - led_timer >= dly) {
-      if (!led_mode) {
-        digitalWrite(LEDPIN, led_mode);
-      }
-      else {
-        digitalWrite(LEDPIN, led_mode);
-      }
-      led_mode = !led_mode;
-      led_timer = curtime;
-    }
-  #endif
+    led_mode = !led_mode;
+    led_timer = curtime;
+  }
 }

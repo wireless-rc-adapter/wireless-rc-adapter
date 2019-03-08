@@ -1,11 +1,12 @@
-/* Added by Bayu Laksono
- * http://github.com/sblaksono/wireless_rc_adapter
- * by Bayu Laksono 27-03-2018
+/* Updated by GregNau 07-03-2019
+ *  - calibrated/constrained rc values
  *
- * Code to read PPM taken from : 
+ * Code to read PPM taken from:
  * https://github.com/timonorawski/RCPPMJoystick
- * by Timon Orawski 11-04-2016  
+ * by Timon Orawski (11-04-2016)
  * Copyright (c) Timon Orawski
+ * Added by Bayu Laksono (27-03-2018)
+ * http://github.com/sblaksono
  */
  
 #if defined PPM_RECEIVER
@@ -73,9 +74,12 @@ uint16_t adjust(uint16_t diff, uint8_t chan) {
   //   case ROLL:     return diff + 90;
   //   case AUX1:     return diff + 10;
   // }
-
+  
   // Convert to microseconds (because of timer prescaler usage)
-  return diff / TIMER_COUNT_DIVIDER;
+  diff = diff / TIMER_COUNT_DIVIDER;
+  diff = constrain(diff, rc_min_values[chan], rc_max_values[chan]);
+  
+  return diff;
 }
 
 void setupPins(void) {
@@ -114,7 +118,7 @@ ISR(TIMER1_CAPT_vect) {
         && diff < (MAX_PULSE_WIDTH * TIMER_COUNT_DIVIDER + THRESHOLD)
         && chan < RC_CHANNELS_COUNT) {
       rc_values[chan] = adjust(diff, chan);  // Store detected value
-      tx_shared_flags |= FLAGS[chan];
+      tx_shared_flags |= FLAGS[chan];  // Set the 'new data to process' flag
     }
 
     chan++;  // No value detected within expected range, move to next channel
