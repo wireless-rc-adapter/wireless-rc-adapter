@@ -9,44 +9,44 @@
  * http://github.com/sblaksono
  */
  
-#if defined PPM_RECEIVER
+#if defined(PPM_RECEIVER)
   #include <avr/interrupt.h>
 
-#if defined FUTABA
-  #if defined CUSTOM_STICK_CENTER
-    #define STICK_CENTER CUSTOM_STICK_CENTER
-  #else
-    #define STICK_CENTER 1530
-  #endif
+//#if defined(FUTABA)
+//  #if defined(CUSTOM_STICK_CENTER)
+//    #define STICK_CENTER CUSTOM_STICK_CENTER
+//  #else
+//    #define STICK_CENTER 1530
+//  #endif
+//
+//  #define STICK_HALFWAY 450
+//  #define THRESHOLD 200  // Threshold is used to detect PPM values (added to range at both ends)
+//#else
+//  #if defined(CUSTOM_STICK_CENTER)
+//    #define STICK_CENTER CUSTOM_STICK_CENTER
+//  #else
+//    #define STICK_CENTER 1500
+//  #endif
+//
+//  #define STICK_HALFWAY 500
+//  #define THRESHOLD 100
+//#endif
 
-  #define STICK_HALFWAY 450
-  #define THRESHOLD 200  // Threshold is used to detect PPM values (added to range at both ends)
-#else
-  #if defined CUSTOM_STICK_CENTER
-    #define STICK_CENTER CUSTOM_STICK_CENTER
-  #else
-    #define STICK_CENTER 1500
-  #endif
-
-  #define STICK_HALFWAY 500
-  #define THRESHOLD 100
-#endif
-
-#define USB_STICK_VALUE_MIN 0
-#define USB_STICK_VALUE_MAX 1000
-
-#define USB_STICK_ROTATION_VALUE_MIN 0
-#define USB_STICK_ROTATION_VALUE_MAX 1000
+//#define USB_STICK_VALUE_MIN 0
+//#define USB_STICK_VALUE_MAX 1000
+//
+//#define USB_STICK_ROTATION_VALUE_MIN 0
+//#define USB_STICK_ROTATION_VALUE_MAX 1000
 
 #define MIN_PULSE_WIDTH (STICK_CENTER - STICK_HALFWAY - 15)
 #define MAX_PULSE_WIDTH (STICK_CENTER + STICK_HALFWAY + 15)
 
-#define RC_CHANNELS_COUNT 6
+#define RC_CHANNELS_COUNT (CHANNELS)
+//#define RC_CHANNELS_COUNT 6
 
 #define PPM_CAPTURE_PIN 4
 #define NEWFRAME_PULSE_WIDTH 3000
 #define TIMER_COUNT_DIVIDER 2
-
 
 
 void initTimer(void) {
@@ -77,7 +77,7 @@ uint16_t adjust(uint16_t diff, uint8_t chan) {
   
   // Convert to microseconds (because of timer prescaler usage)
   diff = diff / TIMER_COUNT_DIVIDER;
-  diff = constrain(diff, rc_min_values[chan], rc_max_values[chan]);
+//  diff = constrain(diff, rc_min_values[chan], rc_max_values[chan]);
   
   return diff;
 }
@@ -87,7 +87,7 @@ void setupPins(void) {
   digitalWrite(PPM_CAPTURE_PIN, HIGH);  // Enable the internal pullup-resistor
 }
 
-void rc_setup_ppm() {
+void rcSetupPpm() {
   setupPins();
   initTimer();
 }
