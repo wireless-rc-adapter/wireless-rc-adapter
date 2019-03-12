@@ -29,9 +29,9 @@ Without them there is no Wireless RC Adapter, ❤️ thanks & 🎉credits goes t
    library
 > - [NicoHood](http://github.com/NicoHood) – PinChangeInterrupt
    library
-> - [Sblaksono](http://github.com/sblaksono) – Added PPM module from:
-> - [Timon Orawski](http://github.com/timonorawski) – [PPM Receiver](http://github.com/timonorawski/RCPPMJoystick)
-> - [hmronline](https://github.com/hmronline) – Maintiained the code
-> - [ultimate1112](https://github.com/ultimate1112) – Bug fix
+> - [Sblaksono](http://github.com/sblaksono) – Integrated PPM module
+> - [Timon Orawski](http://github.com/timonorawski) – RCPPMJoystick (PPM module)
+> - [hmronline](https://github.com/hmronline) – Maintiained & updated the code
+> - [ultimate1112](https://github.com/ultimate1112) – Joystick compatibility bug fixed
 ---
 > **🚧 Pull-requests & issues are always welcome!**
