@@ -4,13 +4,11 @@
 # Wireless RC Adapter 🎮📡
 **A blazing fast adapter for connecting RC receivers to the computer with just an Arduino** (or similar), making possible to play wireless as it meant to be. Already supporting ***PWM*** and ***PPM*** modulations with ***16bit resolution***, the two most popular protocols which is being used by RC receivers and transmitters. So there is no need to hook the radio transmitter with cables to the simulator anymore. Just plug it in the ***USB port and play***. Also it is compatible with a wide range of devices, like the ones running ***Windows, Mac, Linux*** or ***Android/iOS***, so literally almost anything what supports an USB joystick. Aimed to be fast and responsible, though simple to use.
 
-**🔥Featured on [Multirotor Guide](http://www.multirotorguide.com/guide/arduino-as-wireless-rc-simulator-dongle-usb-rc-sim-adapter/) with extensive tutorial!** (22-07-2018)
-
 **💬 Have been reported to work great with these simulators and games:**
 
 [FPV Freerider](http://fpv-freerider.itch.io/fpv-freerider) | [FPV Freerider Recharged](http://fpv-freerider.itch.io/fpv-freerider-recharged) | [RealFlight](http://www.realflight.com) | [Phoenix RC](http://www.phoenix-sim.com) | etc ...
 
-Compatible on **Windows**, **Mac**, **Linux**, **Android**,**iOS** with **PWM** or **PPM** receivers.
+**🔥Featured on [Multirotor Guide](http://www.multirotorguide.com/guide/arduino-as-wireless-rc-simulator-dongle-usb-rc-sim-adapter/) with extensive tutorial!** (22-07-2018)
 
 ## Wiki 📖
 All the necessary information about the adapter are moved now to the Wiki. Please refer to the link below regarding the connections,installation or usage manual. Also available from the tabs on the top of the source repo.
