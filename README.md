@@ -23,9 +23,13 @@ The code above is completely free, but the devices involved in the development a
 
 ## Credits
 Without them there is no Wireless RC Adapter, thanks and credits goes to them:
+
 [MHeironimus](http://github.com/MHeironimus) – [ArduinoUsbJoystick library](http://github.com/MHeironimus/ArduinoJoystickLibrary)
+
 [NicoHood](http://github.com/NicoHood) – [PinChangeInterrupt library](http://github.com/NicoHood/PinChangeInterrupt)
+
 []() – []()
+
 []() – []()
 
 ---
