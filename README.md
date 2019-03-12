@@ -1,43 +1,31 @@
 ![GPLv3 Licensed](https://img.shields.io/badge/license-GPLv3-blue.svg) ![Platforms: Android, Windows, MacOS, Linux](https://img.shields.io/badge/platforms-Android%20%7C%20Windows%20%7C%20Mac%20%7C%20Linux-lightgrey.svg) ![Arduino v1.8.2](https://img.shields.io/badge/arduino-v1.8.2-brightgreen.svg) ![Up-To-Date Dependencies](https://img.shields.io/badge/dependencies-Up%20To%20Date-blue.svg) ![Arduino v1.8.2](https://img.shields.io/badge/development-Active-orange.svg)
 
 # Wireless RC Adapter
-There is no need to hook the transmitter with cables to the simulator device anymore. Instead plug your favorite RC receiver in the adapter and play wireless on TV, Desktop or even on Mobile devices. It acts as an USB joystick, dispatching the channel-values read from the RC receiver. Aimed to be fast and responsible, though simple to use.
-
-Should work with literally everything, which supports game-controllers.
+A blazing fast adapter for connecting RC receivers to the computer with just an Arduino (or similar), making possible to play wireless as it meant to be. Already supporting PWM and PPM modulations with 16bit resolution, the two most popular protocols which is being used by RC receivers and transmitters. So there is no need to hook the radio transmitter with cables to the simulator anymore. Just plug it in the USB port and play. Also it is compatible with a wide range of devices, like the ones running Windows, Mac, Linux or Android/iOS, so literally almost anything what supports an USB joystick. Aimed to be fast and responsible, though simple to use.
 
 **Have been reported to work great with these simulators and games:**
-
-[FPV Freerider](http://fpv-freerider.itch.io/fpv-freerider) | [FPV Freerider Recharged](http://fpv-freerider.itch.io/fpv-freerider-recharged) | [RealFlight](http://www.realflight.com) | [Phoenix](http://www.phoenix-sim.com) | etc ...
+[FPV Freerider](http://fpv-freerider.itch.io/fpv-freerider) | [FPV Freerider Recharged](http://fpv-freerider.itch.io/fpv-freerider-recharged) | [RealFlight](http://www.realflight.com) | [Phoenix RC](http://www.phoenix-sim.com) | etc ...
 
 Compatible on **Windows**, **Mac**, **Linux**, **Android**,**iOS** with **PWM** or **PPM** receivers.
 
-## Requirements
-[Moved to the Wiki...](http://github.com/wireless-rc-adapter/wireless-rc-adapter/wiki/requirements)
+## Wiki
+All the necessary information about the adapter are moved now to the Wiki. Please refer to the link below regarding the connections,installation or usage manual.
 
-## Installation
-Clone or download this repository in the Arduinos ```sketchbook``` folder.
+[Wireless RC Adapter Wiki](http://github.com/wireless-rc-adapter/wireless-rc-adapter/wiki/requirements)
 
-By default it is located in:
- * Windows: ```%userprofile%/Documents/Arduino```
- * Linux: ```~/Sketchbook``` or ```~/Arduino```
- * Mac: ```~/Documents/Arduino```
- 
-Then don't forget to remove the ```-master``` from the directory name.
+## Donation 
+The code above is completely free, but the devices involved in the development are not. You can make a donation here to support the development and speed it up:
 
-## Parts-list
-[Moved to the Wiki...](http://github.com/wireless-rc-adapter/wireless-rc-adapter/wiki/requirements)
+[![PayPal - The safer, easier way to pay online!](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E5N2JXWXTS8MG&source=url)
 
-## Wiring
-[Moved to the Wiki...](http://github.com/wireless-rc-adapter/wireless-rc-adapter/wiki/wiring#sparkfun-pro-micro)
+> For example i would be more than glad to expand the number of supported protocols, but hard to develop something if don't have one. So that's what i'm going to use it for. Don't forget to leave your name in comment of donation, then i past it below in the Credits section.
 
-## Manual
-[Moved to the Wiki...](http://github.com/wireless-rc-adapter/wireless-rc-adapter/wiki/manual)
-
-### Calibration
-[Moved to the Wiki...](http://github.com/wireless-rc-adapter/wireless-rc-adapter/wiki/manual#calibration)
-
-### Debug
-[Moved to the Wiki...](http://github.com/wireless-rc-adapter/wireless-rc-adapter/wiki/manual#debug)
+## Credits
+Without them there is no Wireless RC Adapter, thanks and credits goes to them:
+[MHeironimus](http://github.com/MHeironimus) – [ArduinoUsbJoystick library](http://github.com/MHeironimus/ArduinoJoystickLibrary)
+[NicoHood](http://github.com/NicoHood) – [PinChangeInterrupt library](http://github.com/NicoHood/PinChangeInterrupt)
+[]() – []()
+[]() – []()
 
 ---
-> **🚧 Pull-requests & issues are welcome!**
+> **🚧 Pull-requests & issues are always welcome!**

@@ -13,8 +13,8 @@
 //  (Wiki: http://github.com/wireless-rc-adapter/wireless-rc-adapter/wiki)
 
 // Input signal modulation (uncomment only one!)
-//#define PWM_RECEIVER  // Enable Pulse Width Modulation receiver
-#define PPM_RECEIVER  // Enable Pulse Position Modulation receiver
+#define PWM_RECEIVER  // Enable Pulse Width Modulation receiver
+// #define PPM_RECEIVER  // Enable Pulse Position Modulation receiver
 
 //#define CHANNELS 4  // Override the default 6 channels (PPM max: 8, PWM max: 6)
 
