@@ -2,9 +2,9 @@
   #include "src/PinChangeInterrupt/PinChangeInterrupt.h"
 
   #if defined(ARDUINO_AVR_PROMICRO)
-    const uint8_t RC_PINS[6] = {8, 9, 10, 16, 14, 15};
+    const uint8_t RC_PINS[6] = {15, 14, 16, 10, 9, 8};
   #elif defined(ARDUINO_AVR_MICRO) || defined(ARDUINO_AVR_LEONARDO)
-    const uint8_t RC_PINS[6] = {8, 9, 10, 11, PB1, PB2};
+    const uint8_t RC_PINS[6] = {11, 10, 9, 8, PB2, PB1};
   #elif defined(ARDUINO_AVR_NANO) || defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_DUEMILANOVE)
     const uint8_t RC_PINS[6] = {A1, A2, A3, A4, A5, A6};
   #elif defined(ARDUINO_AVR_ADK) || defined(ARDUINO_AVR_MEGA) || defined(ARDUINO_AVR_MEGA2560)
