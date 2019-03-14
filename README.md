@@ -8,7 +8,7 @@
 
 [FPV Freerider](http://fpv-freerider.itch.io/fpv-freerider) | [FPV Freerider Recharged](http://fpv-freerider.itch.io/fpv-freerider-recharged) | [RealFlight](http://www.realflight.com) | [Phoenix RC](http://www.phoenix-sim.com) | etc ...
 
-**🔥Featured on [Multirotor Guide](http://www.multirotorguide.com/guide/arduino-as-wireless-rc-simulator-dongle-usb-rc-sim-adapter/) with extensive tutorial!** (22-07-2018)
+**🔥Featured on [Multirotor Guide](http://www.multirotorguide.com/guide/arduino-as-wireless-rc-simulator-dongle-usb-rc-sim-adapter/) with extensive article!** (22-07-2018)
 
 ## Wiki 📖
 All the necessary information about the adapter are moved now to the Wiki. Please refer to the link below regarding the connections,installation or usage manual. Also available from the tabs on the top of the source repo.
