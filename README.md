@@ -13,7 +13,7 @@
 ## Wiki 📖
 All the necessary information about the adapter are moved now to the Wiki. Please refer to the link below regarding the connections,installation or usage manual. Also available from the tabs on the top of the source repo.
 
-**[Wireless RC Adapter Wiki](http://github.com/wireless-rc-adapter/wireless-rc-adapter/wiki/requirements)**
+**[Wireless RC Adapter Wiki](http://github.com/wireless-rc-adapter/wireless-rc-adapter/wiki)**
 
 ## Donation 🍺
 **The code above is completely free**, *but the devices involved in the development are not.* You can make a donation here to support the development and speed it up:
