@@ -1,34 +1,34 @@
-/* Wireless RC Adapter (_DEVELOPMENT VERSIE_)
+/* Wireless RC Adapter (DEVELOPER VERSION)
  *  http://wireless-rc-adapter.github.io
  * 
  * Connects an RC receiver as a HID compatible
  * joystick to almost any kind of device, with
  * just a simple USB cable.
  * 
- *  GregNau    2016-2019
+ *  GregNau    2015-2019
  */
 
 
 // Configuration options
 //  (Wiki: http://github.com/wireless-rc-adapter/wireless-rc-adapter/wiki)
 
-// Input signal modulation (uncomment only one!)
-#define PWM_RECEIVER  // Enable Pulse Width Modulation receiver
-// #define PPM_RECEIVER  // Enable Pulse Position Modulation receiver
+// >>> Input signal modulation (uncomment only one!) <<<
+//#define PWM_RECEIVER  // Enable Pulse Width Modulation receiver
+//#define PPM_RECEIVER  // Enable Pulse Position Modulation receiver
 
 //#define CHANNELS 4  // Override the default 6 channels (PPM max: 8, PWM max: 6)
 
-// Serial-Debug options for troubleshooting
+// >>> Serial-Debug options for troubleshooting <<<
 //#define SERIAL_DEBUG  // Enable Serial Debug by uncommenting this line
 //#define SERIAL_SPD 115200  // Set debug bitrate between 9600-115200 bps (default: 9600)
 
-// Calibration settings
+// >>> Calibration settings <<<
 //#define CAL_TIMEOUT  8000  // Set auto-accept timout in ms for calibration (default: 5000)
 //#define CAL_CHANNEL  3  // Set which channel can trigger calibration on boot (default: 3 or 1)
 //#define CAL_DISABLE  // Uncommenting this line causes the calibration to be disabled (***)
 // *** when calibration disabled, do not forget to set stick center and halfway below!
 
-// Joystick settings, trim, etc
+// >>> Joystick settings, trim, etc <<<
 //#define STICK_CENTER 1500  // Configure custom stick center value (disables calibration! default: 1500)
 //#define STICK_HALFWAY 500  // Define custom halfway value (disables calibration! default: 500)
 //#define THRESHOLD 100  // Customize channel value detection threshold (disables calibration! default: 100)
@@ -47,25 +47,20 @@
 #elif defined(ARDUINO_AVR_PROMICRO) || defined(ARDUINO_AVR_LEONARDO) || defined(ARDUINO_AVR_MICRO)
   // Sparkfun ProMicro, Arduino Leonardo & Micro
 #else
-  // Other boards (though you can try to comment the line below, maybe it works...)
   #error Not compatible board selected. For a list of compatible boards please see the Wiki pages.
 #endif
 
 // Error checking for receiver modulation configuration
 #if defined(PWM_RECEIVER) && defined(PPM_RECEIVER)
-  // Both of the modulation are activated
   #error Both PWM_ and PPM_ receiver is enabled, please disable one!
 #elif !defined(PWM_RECEIVER) && !defined(PPM_RECEIVER)
-  // None of the modulations are confgured
   #error No _RECEIVER modulation have been configured, please enable one!
 #endif
 
 // Error checking for channels configuration
 #if !defined(CHANNELS)
-  // Set default 6 channels
-  #define CHANNELS 6
+  #define CHANNELS 6  // Set default 6 channels
 #elif CHANNELS > 8
-  // Warn if configured above maximum possible channels
   #error Too much channels are configured, the maximum is 8 for now!
 #endif
 

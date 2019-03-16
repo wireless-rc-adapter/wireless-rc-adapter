@@ -1,7 +1,5 @@
 
-
 // ToDo - replace compare values with STICK_CENTER THRESHOLD ETC
-
 
 // Set default timeout if not configured
 #if !defined(CAL_TIMEOUT)
@@ -136,6 +134,7 @@
     }
     else {
       #if defined(SERIAL_DEBUG)
+        calPrintValues();
         Serial.println("CALIBRATION DATA LOADED FROM EEPROM.");
       #endif
       
