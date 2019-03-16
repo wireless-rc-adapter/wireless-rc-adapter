@@ -25,8 +25,8 @@
 // >>> Calibration settings <<<
 //#define CAL_TIMEOUT  8000  // Set auto-accept timout in ms for calibration (default: 5000)
 //#define CAL_CHANNEL  3  // Set which channel can trigger calibration on boot (default: 3 or 1)
-//#define CAL_DISABLE  // Uncommenting this line causes the calibration to be disabled (***)
-// *** when calibration disabled, do not forget to set stick center and halfway below!
+//#define CAL_DISABLE  // Uncommenting this line causes the calibration to be disabled *
+// (* when calibration disabled, do not forget to set stick center and halfway below!)
 
 // >>> Joystick settings, trim, etc <<<
 //#define STICK_CENTER 1500  // Configure custom stick center value (disables calibration! default: 1500)
