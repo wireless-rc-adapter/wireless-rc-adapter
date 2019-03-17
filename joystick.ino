@@ -4,10 +4,16 @@
   #define HID_REPORT_ID 0x03  // Indicates the joystick's HID report ID. This value must be unique
                               // if you are creating multiple instances of Joystick. Do not use 
                               // 0x01 or 0x02 as they are used by the built-in Keyboard and Mouse libraries.
-  #define JOYSTICK_TYPE 0x04  // Indicates the HID input device type. Supported values:
-                                                 // JOYSTICK_TYPE_JOYSTICK or 0x04 - Joystick
-                                                 // JOYSTICK_TYPE_GAMEPAD or 0x05 - Gamepad
-                                                 // JOYSTICK_TYPE_MULTI_AXIS or 0x08 - Multi-axis Controller
+  
+  #if defined(COMPAT_FIX)
+    #define JOYSTICK_TYPE 0x08  // Indicates the HID input device type. Supported values:
+                                                   // JOYSTICK_TYPE_JOYSTICK or 0x04 - Joystick
+                                                   // JOYSTICK_TYPE_GAMEPAD or 0x05 - Gamepad
+                                                   // JOYSTICK_TYPE_MULTI_AXIS or 0x08 - Multi-axis Controller
+  #else
+    #define JOYSTICK_TYPE 0x04
+  #endif
+  
   #define BUTTON_COUNT 2  // Indicates how many buttons will be available on the joystick. (0-32)
   #define HAT_SWITCH_COUNT 0  // Indicates how many hat switches will be available on the joystick. (0-2)
   #define INCLUDE_X_AXIS true  // Indicates if the X Axis is available on the joystick.

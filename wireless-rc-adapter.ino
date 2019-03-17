@@ -29,10 +29,11 @@
 // (* when calibration disabled, do not forget to set stick center and halfway below!)
 
 // >>> Joystick settings, trim, etc <<<
-//#define STICK_CENTER 1500  // Configure custom stick center value (disables calibration! default: 1500)
-//#define STICK_HALFWAY 500  // Define custom halfway value (disables calibration! default: 500)
-//#define THRESHOLD 100  // Customize channel value detection threshold (disables calibration! default: 100)
+//#define STICK_CENTER 1500  // Configure custom stick center value (disables calibration! | default: 1500)
+//#define STICK_HALFWAY 500  // Define custom halfway value (disables calibration! | default: 500)
+//#define THRESHOLD 100  // Customize channel value detection threshold (disables calibration! | default: 100)
 //#define FUTABA  // Futaba PPM fix (disables calibration!)
+//#define COMPAT_FIX  // In case of joystick issues, try to enable this option. (eg. Aerofly sim)
 
 // End of Configuration options
 
