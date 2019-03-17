@@ -117,8 +117,22 @@
   }
   
   bool checkIfCal() {
+    #if defined(SERIAL_DEBUG)
+      uint32_t nexttime = millis();
+    #endif
+    
     // Wait here until valid signal on CAL_CHANNEL pin
-    while (!rc_values[CAL_CHANNEL-1] && rc_values[CAL_CHANNEL-1] < 360);
+    while (!rc_values[CAL_CHANNEL-1] && rc_values[CAL_CHANNEL-1] < 360) {
+      #if defined(SERIAL_DEBUG)
+        uint32_t  curtime = millis();
+        
+        if (curtime >= nexttime) {
+            Serial.println("NO SIGNAL ON CAL_CHANNEL!");
+          
+          nexttime = curtime + 1000;
+        }
+      #endif
+    }
     
     // Check if calibration necessary or triggered with full CAL_CHANNEL
     for (uint8_t d=0;d<CHANNELS;d++) {
@@ -153,6 +167,8 @@
       Serial.print("MAX:");
       Serial.print(str);
       Serial.println();
+
+      str[0] = (char)0;  // Clean the char[array]
     
       for (uint8_t c=0;c<CHANNELS;c++) {
         sprintf(str, "%s\t%d", str, rc_min_values[c]);
