@@ -1,4 +1,4 @@
-/* Wireless RC Adapter (DEVELOPER VERSION)
+/* Wireless RC Adapter (DEVELOPMENT VERSION)
  *  http://wireless-rc-adapter.github.io
  * 
  * Connects an RC receiver as a HID compatible
@@ -23,8 +23,8 @@
 //#define SERIAL_SPD 115200  // Set debug bitrate between 9600-115200 bps (default: 9600)
 
 // >>> Calibration settings <<<
-//#define CAL_TIMEOUT  8000  // Set auto-accept timout in ms for calibration (default: 5000)
 //#define CAL_CHANNEL  3  // Set which channel can trigger calibration on boot (default: 3 or 1)
+//#define CAL_TIMEOUT  7000  // Custom delay in milliseconds to auto-accept calibration data (default: 5000)
 //#define CAL_DISABLE  // Uncommenting this line causes the calibration to be disabled *
 // (* when calibration disabled, do not forget to set stick center and halfway below!)
 
