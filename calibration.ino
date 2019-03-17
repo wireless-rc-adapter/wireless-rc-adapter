@@ -30,16 +30,18 @@
   void rcCalibrate() {
     cal_mode = checkIfCal();  // Check if calibration necessary
   
-    #if defined(SERIAL_DEBUG)
-      if (cal_mode) Serial.println("CALIBRATION ACTIVE");
-    #endif
-  
-    // Set initial values off-range for calibration
-    for (uint8_t i=0;i<CHANNELS;i++) {
-      rc_min_values[i] = 2500;
-      rc_max_values[i] = 0;
+    if (cal_mode) {
+      #if defined(SERIAL_DEBUG)
+        Serial.println("CALIBRATION ACTIVE");
+      #endif
+
+      // Set initial values off-range for calibration
+      for (uint8_t i=0;i<CHANNELS;i++) {
+        rc_min_values[i] = 2500;
+        rc_max_values[i] = 0;
+      }
     }
-  
+
     while (cal_mode) {
       #if defined(PWM_RECEIVER)
         rcProcessPwm();
