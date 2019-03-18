@@ -23,15 +23,21 @@
 //#define SERIAL_SPD 115200  // Set debug bitrate between 9600-115200 bps (default: 9600)
 
 // >>> Calibration settings <<<
-//#define CAL_CHANNEL  3  // Set which channel can trigger calibration on boot (default: 3 or 1)
-//#define CAL_TIMEOUT  7000  // Custom delay in milliseconds to auto-accept calibration data (default: 5000)
+//#define CAL_CHANNEL 3  // Set which channel can trigger calibration on boot (default: 3 or 1)
+//#define CAL_TIMEOUT 7000  // Custom delay in milliseconds to auto-accept calibration data (default: 5000)
 //#define CAL_DISABLE  // Uncommenting this line causes the calibration to be disabled *
 // (* when calibration disabled, do not forget to set stick center and halfway below!)
 
-// >>> Joystick settings, trim, etc <<<
+// >>> Joystick settings <<<
 //#define STICK_CENTER 1500  // Configure custom stick center value (disables calibration! | default: 1500)
 //#define STICK_HALFWAY 500  // Define custom halfway value (disables calibration! | default: 500)
 //#define THRESHOLD 100  // Customize channel value detection threshold (disables calibration! | default: 100)
+//#define BTN0_KEY_LOW 'u'  // Assign keyboard key to send when Button-0 is in LOW position
+//#define BTN0_KEY_HIGH 'i'  // Assign keyboard key to send whe Button-0 is in HIGH position
+//#define BTN1_KEY_LOW 'c'  // Assign keyboard key to send when Button-1 is in LOW position
+//#define BTN1_KEY_HIGH 'c'  // Assign keyboard key to send when Button-1 is in HIGH position
+ 
+// >>> Fixes, workarounds, etc <<<
 //#define FUTABA  // Futaba PPM fix (disables calibration!)
 //#define COMPAT_FIX  // In case of joystick issues, try to enable this option. (eg. Aerofly sim)
 
@@ -53,9 +59,9 @@
 
 // Error checking for receiver modulation configuration
 #if defined(PWM_RECEIVER) && defined(PPM_RECEIVER)
-  #error Both PWM_ and PPM_ receiver is enabled, please disable one!
+  #error Both PWM_ and PPM_ receiver is enabled, please disable one in the configuration above!
 #elif !defined(PWM_RECEIVER) && !defined(PPM_RECEIVER)
-  #error No _RECEIVER modulation have been configured, please enable one!
+  #error No _RECEIVER modulation have been configured, please enable one in the configuration above!
 #endif
 
 // Error checking for channels configuration

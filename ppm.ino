@@ -1,7 +1,4 @@
-/* Updated by GregNau 07-03-2019
- *  - calibrated/constrained rc values
- *
- * Code to read PPM taken from:
+/* Code to read PPM taken from:
  * https://github.com/timonorawski/RCPPMJoystick
  * by Timon Orawski (11-04-2016)
  * Copyright (c) Timon Orawski
@@ -13,37 +10,10 @@
 #if defined(PPM_RECEIVER)
   #include <avr/interrupt.h>
 
-//#if defined(FUTABA)
-//  #if defined(CUSTOM_STICK_CENTER)
-//    #define STICK_CENTER CUSTOM_STICK_CENTER
-//  #else
-//    #define STICK_CENTER 1530
-//  #endif
-//
-//  #define STICK_HALFWAY 450
-//  #define THRESHOLD 200  // Threshold is used to detect PPM values (added to range at both ends)
-//#else
-//  #if defined(CUSTOM_STICK_CENTER)
-//    #define STICK_CENTER CUSTOM_STICK_CENTER
-//  #else
-//    #define STICK_CENTER 1500
-//  #endif
-//
-//  #define STICK_HALFWAY 500
-//  #define THRESHOLD 100
-//#endif
-
-//#define USB_STICK_VALUE_MIN 0
-//#define USB_STICK_VALUE_MAX 1000
-//
-//#define USB_STICK_ROTATION_VALUE_MIN 0
-//#define USB_STICK_ROTATION_VALUE_MAX 1000
-
 #define MIN_PULSE_WIDTH (STICK_CENTER - STICK_HALFWAY - 15)
 #define MAX_PULSE_WIDTH (STICK_CENTER + STICK_HALFWAY + 15)
 
 #define RC_CHANNELS_COUNT (CHANNELS)
-//#define RC_CHANNELS_COUNT 6
 
 #define PPM_CAPTURE_PIN 4
 #define NEWFRAME_PULSE_WIDTH 3000
