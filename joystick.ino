@@ -1,5 +1,7 @@
 #if !defined(SERIAL_DEBUG)
   #include "src/ArduinoJoystickLibrary/Joystick.h"
+  
+  // ToDo - this nightmare which begins here ^^ \\
 
   #define HID_REPORT_ID 0x03  // Indicates the joystick's HID report ID. This value must be unique
                               // if you are creating multiple instances of Joystick. Do not use 
@@ -119,7 +121,7 @@
     Joystick.begin();
   }
   
-  // Send joystick values to usb host
+  // Send joystick values to the usb host
   void outputJoystick() {
     static uint8_t localflags;
   
@@ -129,12 +131,14 @@
       // Process every channel with a flag
       for (uint8_t i=0;i<CHANNELS;i++) {
         if (localflags & FLAGS[i]) {
+
           #if CHANNELS == 1
             switch (i) {
               case 0:  // CH 1
                 Joystick.setXAxis(rc_values[i]);
                 break;
             }
+            
           #elif CHANNELS == 2
             switch (i) {
               case 0:  // CH 1
@@ -144,6 +148,7 @@
                 Joystick.setYAxis(rc_values[i]);
                 break;
             }
+            
           #elif CHANNELS == 3
             switch (i) {
               case 0:  // CH 1
@@ -167,6 +172,7 @@
                 #endif
                 break;
             }
+            
           #elif CHANNELS == 4
             switch (i) {
               case 0:  // CH 1
@@ -182,6 +188,7 @@
                 Joystick.setRxAxis(rc_values[i]);
                 break;
             }
+            
           #elif CHANNELS == 5
             switch (i) {
               case 0:  // CH 1
@@ -211,6 +218,7 @@
                 #endif
                 break;
             }
+            
           #elif CHANNELS == 6
             switch (i) {
               case 0:  // CH 1
@@ -243,6 +251,7 @@
                 #endif
                 break;
             }
+            
           #elif CHANNELS == 7
             switch (i) {
               case 0:  // CH 1
@@ -289,6 +298,7 @@
                 #endif
                 break;
             }
+            
           #elif CHANNELS == 8
             switch (i) {
               case 0:  // CH 1

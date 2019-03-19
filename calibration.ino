@@ -9,20 +9,21 @@
 // Set default calibration trigger cannel if not configured
 #if !defined(CAL_CHANNEL)
   #if CHANNELS > 2
-    #define CAL_CHANNEL 3  // To CH3 when possible
+    #define CAL_CHANNEL 3  // To CH 3 whenever is possible
   #else
-    #define CAL_CHANNEL 1  // Otherwise to CH1
+    #define CAL_CHANNEL 1  // Otherwise to CH 1
   #endif
 #endif
 
 #if defined(CAL_DISABLED)
+  // When calibration disabled set min-max values to manually configured
   void rcCalibrate() {
     for (uint8_t e=0;e<CHANNELS;e++) {
-      rc_min_values[e] = STICK_CENTER - STICK_HALFWAY;
-      rc_max_values[e] = STICK_CENTER + STICK_HALFWAY;
+      rc_min_values[e] = STICK_CENTER - STICK_HALFWAY;  // Mins
+      rc_max_values[e] = STICK_CENTER + STICK_HALFWAY;  // Maxs
     }
   }
-#else
+#else  // Real CALIBRATION FUNCTIONS begins here...
   bool cal_mode = false;
   uint32_t cal_timer = 0L;
   
@@ -35,7 +36,7 @@
         Serial.println("CALIBRATION ACTIVE");
       #endif
 
-      // Set initial values off-range for calibration
+      // Set initial values probably off-range for calibration
       for (uint8_t i=0;i<CHANNELS;i++) {
         rc_min_values[i] = 2500;
         rc_max_values[i] = 0;

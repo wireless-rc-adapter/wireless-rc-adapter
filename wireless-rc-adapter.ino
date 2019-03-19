@@ -50,18 +50,19 @@
 // Check if board is compatible and set board specific options
 #if defined(ARDUINO_AVR_NANO) || defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_DUEMILANOVE) || defined(ARDUINO_AVR_ADK) || defined(ARDUINO_AVR_MEGA) || defined(ARDUINO_AVR_MEGA2560)
   // Arduino Nano, Uno, Duemilanove, Mega, 2560, ADK
-  #define SERIAL_DEBUG
+  #define SERIAL_DEBUG  // Force serial-debug with these boards
 #elif defined(ARDUINO_AVR_PROMICRO) || defined(ARDUINO_AVR_LEONARDO) || defined(ARDUINO_AVR_MICRO)
   // Sparkfun ProMicro, Arduino Leonardo & Micro
 #else
+  // Disable this line to try unsupported boards
   #error Not compatible board selected. For a list of compatible boards please see the Wiki pages.
 #endif
 
 // Error checking for receiver modulation configuration
 #if defined(PWM_RECEIVER) && defined(PPM_RECEIVER)
-  #error Both PWM_ and PPM_ receiver is enabled, please disable one in the configuration above!
+  #error Both PWM_ and PPM_ receiver is enabled, please disable one in the configuration!
 #elif !defined(PWM_RECEIVER) && !defined(PPM_RECEIVER)
-  #error No _RECEIVER modulation have been configured, please enable one in the configuration above!
+  #error No _RECEIVER modulation have been configured, please enable one in the configuration!
 #endif
 
 // Error checking for channels configuration
