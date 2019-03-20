@@ -94,7 +94,7 @@
     #define BTNKEY
     #include <Keyboard.h>
     
-    boolean key_sent = false;
+    boolean keyb_flag = false;
   #endif
 
   // Joystick configuration (manual in src/ArduinoJoystickLibrary/README.md)
@@ -159,13 +159,13 @@
                 break;
               case 2:  // CH 3
                 #if defined(BTNKEY)
-                  if (rc_values[i] < STICK_CENTER && !key_sent) {
+                  if (rc_values[i] < STICK_CENTER && !keyb_flag) {
                     Keyboard.write(BTN0_KEY_LOW);
-                    key_sent = true;
+                    keyb_flag = true;
                   }
-                  else if (rc_values[i] > STICK_CENTER && key_sent) {
+                  else if (rc_values[i] > STICK_CENTER && keyb_flag) {
                     Keyboard.write(BTN0_KEY_HIGH);
-                    key_sent = false;
+                    keyb_flag = false;
                   }
                 #else
                   Joystick.setButton(0, rc_values[i] < STICK_CENTER ? 0 : 1);
@@ -205,13 +205,13 @@
                 break;
               case 4:  // CH 5
                 #if defined(BTNKEY)
-                  if (rc_values[i] < STICK_CENTER && !key_sent) {
+                  if (rc_values[i] < STICK_CENTER && !keyb_flag) {
                     Keyboard.write(BTN0_KEY_LOW);
-                    key_sent = true;
+                    keyb_flag = true;
                   }
-                  else if (rc_values[i] > STICK_CENTER && key_sent) {
+                  else if (rc_values[i] > STICK_CENTER && keyb_flag) {
                     Keyboard.write(BTN0_KEY_HIGH);
-                    key_sent = false;
+                    keyb_flag = false;
                   }
                 #else
                   Joystick.setButton(0, rc_values[i] < STICK_CENTER ? 0 : 1);
@@ -238,13 +238,13 @@
                 break;
               case 5:  // CH 6
                 #if defined(BTNKEY)
-                  if (rc_values[i] < STICK_CENTER && !key_sent) {
+                  if (rc_values[i] < STICK_CENTER && !keyb_flag) {
                     Keyboard.write(BTN0_KEY_LOW);
-                    key_sent = true;
+                    keyb_flag = true;
                   }
-                  else if (rc_values[i] > STICK_CENTER && key_sent) {
+                  else if (rc_values[i] > STICK_CENTER && keyb_flag) {
                     Keyboard.write(BTN0_KEY_HIGH);
-                    key_sent = false;
+                    keyb_flag = false;
                   }
                 #else
                   Joystick.setButton(0, rc_values[i] < STICK_CENTER ? 0 : 1);
@@ -271,13 +271,13 @@
                 break;
               case 5:  // CH 6
                 #if defined(BTNKEY)
-                  if (rc_values[i] < STICK_CENTER && !key_sent) {
+                  if (rc_values[i] < STICK_CENTER && !keyb_flag) {
                     Keyboard.write(BTN0_KEY_LOW);
-                    key_sent = true;
+                    keyb_flag = true;
                   }
-                  else if (rc_values[i] > STICK_CENTER && key_sent) {
+                  else if (rc_values[i] > STICK_CENTER && keyb_flag) {
                     Keyboard.write(BTN0_KEY_HIGH);
-                    key_sent = false;
+                    keyb_flag = false;
                   }
                 #else
                   Joystick.setButton(0, rc_values[i] < STICK_CENTER ? 0 : 1);
@@ -285,13 +285,13 @@
                 break;
               case 6:  // CH 7
                 #if defined(BTNKEY)
-                  if (rc_values[i] < STICK_CENTER && !key_sent) {
+                  if (rc_values[i] < STICK_CENTER && !keyb_flag) {
                     Keyboard.write(BTN1_KEY_LOW);
-                    key_sent = true;
+                    keyb_flag = true;
                   }
-                  else if (rc_values[i] > STICK_CENTER && key_sent) {
+                  else if (rc_values[i] > STICK_CENTER && keyb_flag) {
                     Keyboard.write(BTN1_KEY_HIGH);
-                    key_sent = false;
+                    keyb_flag = false;
                   }
                 #else
                   Joystick.setButton(1, rc_values[i] < STICK_CENTER ? 0 : 1);
@@ -321,13 +321,13 @@
                 break;
               case 6:  // CH 7
                 #if defined(BTNKEY)
-                  if (rc_values[i] < STICK_CENTER && !key_sent) {
+                  if (rc_values[i] < STICK_CENTER && !keyb_flag) {
                     Keyboard.write(BTN0_KEY_LOW);
-                    key_sent = true;
+                    keyb_flag = true;
                   }
-                  else if (rc_values[i] > STICK_CENTER && key_sent) {
+                  else if (rc_values[i] > STICK_CENTER && keyb_flag) {
                     Keyboard.write(BTN0_KEY_HIGH);
-                    key_sent = false;
+                    keyb_flag = false;
                   }
                 #else
                   Joystick.setButton(0, rc_values[i] < STICK_CENTER ? 0 : 1);
@@ -335,13 +335,13 @@
                 break;
               case 7:  // CH 8
                 #if defined(BTNKEY)
-                  if (rc_values[i] < STICK_CENTER && !key_sent) {
+                  if (rc_values[i] < STICK_CENTER && !keyb_flag) {
                     Keyboard.write(BTN1_KEY_LOW);
-                    key_sent = true;
+                    keyb_flag = true;
                   }
-                  else if (rc_values[i] > STICK_CENTER && key_sent) {
+                  else if (rc_values[i] > STICK_CENTER && keyb_flag) {
                     Keyboard.write(BTN1_KEY_HIGH);
-                    key_sent = false;
+                    keyb_flag = false;
                   }
                 #else
                   Joystick.setButton(1, rc_values[i] < STICK_CENTER ? 0 : 1);

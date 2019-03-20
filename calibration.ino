@@ -64,19 +64,13 @@
         }
       }
   
+      // When there is no new mins or maxs since given timeout
       if (cal_timer && cal_timer <= curtime) {
         uint16_t diffvalues[CHANNELS];
         boolean diffresult = true;
   
         #if defined(SERIAL_DEBUG)
-  //        calPrintValues();
-  static char str[64];
-  
-        Serial.println("\tCH1\tCH2\tCH3\tCH4\tCH5\tCH6");
-        sprintf(str,"MAX:\t%d\t%d\t%d\t%d\t%d\t%d\n",rc_max_values[0],rc_max_values[1],rc_max_values[2],rc_max_values[3],rc_max_values[4],rc_max_values[5]);
-        Serial.print(str);
-        sprintf(str,"MIN:\t%d\t%d\t%d\t%d\t%d\t%d\n",rc_min_values[0],rc_min_values[1],rc_min_values[2],rc_min_values[3],rc_min_values[4],rc_min_values[5]);
-        Serial.print(str);
+          calPrintValues();
         #endif
   
         for (uint8_t x=0;x<CHANNELS;x++) {

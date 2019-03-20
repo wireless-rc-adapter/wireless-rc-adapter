@@ -65,11 +65,19 @@
   #error No _RECEIVER modulation have been configured, please enable one in the configuration!
 #endif
 
-// Error checking for channels configuration
+// Error checking for channels default configuration
 #if !defined(CHANNELS)
-  #define CHANNELS 6  // Set default 6 channels
-#elif CHANNELS > 8
-  #error Too much channels are configured, the maximum is 8 for now!
+  #if defined(PWM_RECEIVER)
+    #define CHANNELS 6  // Set default 6 channels for PWM modulation
+  #elif defined(PPM_RECEIVER)
+    #define CHANNELS 8  // Set default 8 channels for PWM modulation
+  #endif
+#else 
+  #if defined(PWM_RECEIVER) && CHANNELS > 6
+    #error Too much channels are configured, the maximum is 6 for PWM modulation!
+  #elif defined(PPM_RECEIVER) && CHANNELS > 8
+    #error Too much channels are configured, the maximum is 8 for PPM modulation!
+  #endif
 #endif
 
 // Configure joystick settings
