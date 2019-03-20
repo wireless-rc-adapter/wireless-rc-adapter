@@ -1,4 +1,4 @@
-/* Wireless RC Adapter (DEVELOPMENT VERSION)
+/* Wireless RC Adapter v2.1
  *  http://wireless-rc-adapter.github.io
  * 
  * Connects an RC receiver as a HID compatible
