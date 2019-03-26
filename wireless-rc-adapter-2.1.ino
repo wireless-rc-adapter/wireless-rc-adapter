@@ -16,7 +16,7 @@
 //#define PWM_RECEIVER  // Enable Pulse Width Modulation receiver
 //#define PPM_RECEIVER  // Enable Pulse Position Modulation receiver
 
-//#define CHANNELS 4  // Override the default 6 channels (PPM max: 8, PWM max: 6)
+//#define CHANNELS 8  // Override the default 6 channels (PPM max: 8, PWM max: 6)
 
 // >>> Serial-Debug options for troubleshooting <<<
 //#define SERIAL_DEBUG  // Enable Serial Debug by uncommenting this line

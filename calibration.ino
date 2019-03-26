@@ -17,7 +17,7 @@
 
 #if defined(CAL_DISABLE)
   // When calibration disabled set min-max values to manually configured
-  void rcCalibrate() {
+  void rcCalibrate() {  // Fake CALIBRATION
     for (uint8_t e=0;e<CHANNELS;e++) {
       rc_min_values[e] = STICK_CENTER - STICK_HALFWAY;  // Mins
       rc_max_values[e] = STICK_CENTER + STICK_HALFWAY;  // Maxs
@@ -104,7 +104,7 @@
         }
         else {
           #if defined(SERIAL_DEBUG)
-            Serial.print("\n\nALL CHANNEL MUST BE \"OK\" TO AUTOSAVE!\nOTHERWISE PRESS BUTTON TO SAVE CAL.DATA.\n\n");
+            Serial.print("\n\nALL CHANNEL MUST BE \"OK\" TO AUTOSAVE!\n\n");
           #endif
   
           cal_timer = 0;  // Reset timeout
@@ -135,12 +135,11 @@
     for (uint8_t d=0;d<CHANNELS;d++) {
       if (rc_min_values[d] < 360 || rc_max_values[d] > 2500
           || rc_min_values[d] > 1500 || rc_max_values[d] < 1500) {
-        
         return true;
       }
     }
+    
     if (rc_values[2] >= 1600) {
-      
       return true;
     }
     else {
