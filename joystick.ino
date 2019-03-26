@@ -316,7 +316,7 @@
               case 4:  // CH 5
                 Joystick.setRyAxis(rc_values[i]);
                 break;
-              case 5;  // CH 6
+              case 5:  // CH 6
                 Joystick.setRzAxis(rc_values[i]);
                 break;
               case 6:  // CH 7
