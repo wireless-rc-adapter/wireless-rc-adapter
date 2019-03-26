@@ -15,7 +15,7 @@
   #endif
 #endif
 
-#if defined(CAL_DISABLED)
+#if defined(CAL_DISABLE)
   // When calibration disabled set min-max values to manually configured
   void rcCalibrate() {
     for (uint8_t e=0;e<CHANNELS;e++) {
