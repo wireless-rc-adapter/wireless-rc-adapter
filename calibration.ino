@@ -120,6 +120,10 @@
     
     // Wait here until valid signal on CAL_CHANNEL pin
     while (!rc_values[CAL_CHANNEL-1] && rc_values[CAL_CHANNEL-1] < 360) {
+      #if defined(PWM_RECEIVER)
+        rcProcessPwm();  // Measure channels pwm timing values.
+      #endif
+
       #if defined(SERIAL_DEBUG)
         uint32_t  curtime = millis();
         
